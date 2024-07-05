@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Rock Paper Scissor</h1>
+    <div class="buttons">
+
+        <button class="image" id="rock" onclick="
+
+            computerChoice = genrateComputerChoice();
+            resultMsg = getResult(`Rock`, computerChoice);    
+            showResult(`Rock`, computerChoice, resultMsg);
+            ">
+            <!-- <div id="text">Rock</div> -->
+        </button>
+ 
+        <button class="image" id="paper" onclick="
+
+            computerChoice = genrateComputerChoice();
+            resultMsg = getResult(`Paper`, computerChoice);
+            showResult(`Paper`, computerChoice, resultMsg);
+            ">
+            <!-- <div id="text">Paper</div> -->
+        </button>
+
+        <button class="image" id="scissor" onclick="
+
+            computerChoice = genrateComputerChoice();
+            resultMsg = getResult(`Scissor`, computerChoice);
+            showResult(`Scissor`, computerChoice, resultMsg);
+            ">
+            <!-- <div id="text">Scissor</div> -->
+        </button>
+        <button id="restartButton" onclick="localStorage.clear()
+            resetScore()">Restart</button>
+    </div>
+        <h3 id="user-move"></h3>
+        <h3 id="computer-move"></h3>
+        <h3 id="match-result"></h3>
+        <h3 id="final-score"></h3>
+
+    <script>
+        
+        let scoreStr = localStorage.getItem('Score');
+        let score;
+        resetScore(scoreStr);
+
+        function resetScore(scoreStr) {
+                score = scoreStr ? JSON.parse(scoreStr) : {     // Using ternirary operatot, Agr scoreStre avail. hai to ye use vrna 2nd val option.
+                    win : 0,
+                    lose : 0,
+                    tie : 0
+            };
+                score.displayScore = function() {
+                    return `Score:-  Won: ${score.win}  Lose: ${score.lose}  Tie: ${score.tie}`;
+            };
+
+            showResult();
+        }
+
+        let resultMsg;
+        
+        function genrateComputerChoice() {
+            let randomnumber = Math.random() * 3;   // Value of Math.random() = 0.770208969446617  and *3 is only between 0 and 3.
+            if (randomnumber > 0 && randomnumber <= 1) {
+                return 'Rock';
+            } else if ( randomnumber > 1 && randomnumber <= 2) 
+            {
+                return 'Paper';
+            } else
+            {
+                return 'Scissor';
+            }
+        }
+
+        function getResult(userMove, computerMove){
+            if (userMove === 'Rock'){
+                if (computerMove === 'Scissor') {
+                    score.win ++;   // Same as += 1
+                    return `User Won.`;
+                } else if (computerMove === 'Paper') {
+                    score.lose ++;
+                    return `Computer has Won.`;
+                } else {
+                    score.tie ++;   
+                    return `It's a tie.`;
+                } 
+            } else if (userMove === 'Paper') {
+                if (computerMove === 'Rock') {
+                    score.win ++;
+                    return `User Won.`;
+                } else if (computerMove === 'Scissor') {
+                    score.lose ++;
+                    return 'Computer has Won.';
+                } else {
+                    score.tie ++;
+                    return `It's a tie.`;
+                }
+            } else {
+                if (computerMove === 'Paper') {
+                    score.win ++;
+                    return 'User Won.';
+                } else if (computerMove === 'Rock') {
+                    score.lose ++;
+                    return `Computer has Won.`;
+                } else if (computerMove === 'Scissor'){ 
+                    score.tie ++;
+                    return `It's a tie.`;
+                }
+            }
+        }
+
+        function showResult(userMove,computerMove,result){
+            localStorage.setItem('Score',JSON.stringify(score));
+
+            document.querySelector(`#user-move`).innerText = 
+                userMove !== undefined ? `You have chosen ${userMove}.` : ``;
+
+            document.querySelector(`#computer-move`).innerText = 
+                computerMove !== undefined ? `Computer Choice is ${computerMove}.` : ``;
+                
+            document.querySelector(`#match-result`).innerText = 
+                result !== undefined ? result : ``;
+            document.querySelector(`#final-score`).innerText = score.displayScore();
+        }
+
+    </script>
+</body>
+</html>

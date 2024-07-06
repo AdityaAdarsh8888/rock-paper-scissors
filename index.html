@@ -9,40 +9,41 @@
 <body>
     <h1>Rock Paper Scissor</h1>
     <div class="buttons">
+        <div class="image-div">
+            <button class="image" id="rock" onclick="
 
-        <button class="image" id="rock" onclick="
-
-            computerChoice = genrateComputerChoice();
-            resultMsg = getResult(`Rock`, computerChoice);    
-            showResult(`Rock`, computerChoice, resultMsg);
-            ">
-            <!-- <div id="text">Rock</div> -->
-        </button>
+                computerChoice = genrateComputerChoice();
+                resultMsg = getResult(`Rock`, computerChoice);    
+                showResult(`Rock`, computerChoice, resultMsg);
+                ">
+            </button>
  
-        <button class="image" id="paper" onclick="
+            <button class="image" id="paper" onclick="
+    
+                computerChoice = genrateComputerChoice();
+                resultMsg = getResult(`Paper`, computerChoice);
+                showResult(`Paper`, computerChoice, resultMsg);
+                ">
+            </button>
+        
+            <button class="image" id="scissor" onclick="
+    
+                computerChoice = genrateComputerChoice();
+                resultMsg = getResult(`Scissor`, computerChoice);
+                showResult(`Scissor`, computerChoice, resultMsg);
+                ">
+            </button>
 
-            computerChoice = genrateComputerChoice();
-            resultMsg = getResult(`Paper`, computerChoice);
-            showResult(`Paper`, computerChoice, resultMsg);
-            ">
-            <!-- <div id="text">Paper</div> -->
-        </button>
-
-        <button class="image" id="scissor" onclick="
-
-            computerChoice = genrateComputerChoice();
-            resultMsg = getResult(`Scissor`, computerChoice);
-            showResult(`Scissor`, computerChoice, resultMsg);
-            ">
-            <!-- <div id="text">Scissor</div> -->
-        </button>
-        <button id="restartButton" onclick="localStorage.clear()
-            resetScore()">Restart</button>
+            
+        </div>
     </div>
         <h3 id="user-move"></h3>
         <h3 id="computer-move"></h3>
         <h3 id="match-result"></h3>
         <h3 id="final-score"></h3>
+        <button id="restartButton" onclick="localStorage.clear()
+                resetScore()">Restart
+        </button>
 
     <script>
         
